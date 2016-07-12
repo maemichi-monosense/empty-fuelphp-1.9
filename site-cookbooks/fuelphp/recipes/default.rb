@@ -4,16 +4,20 @@
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
+%w(apache2 mariadb php git).each { |recipe| include_recipe recipe }
+
 # PHP
 %w(php-mysql php-devel php-mbstring).each { |p| package p }
 
 # start services and set to start on boot
 service 'httpd' do
+  provider Chef::Provider::Service::Systemd
   supports status: true, restart: true, reload: true
   action [:enable, :start]
 end
 
 service 'mysqld' do
+  provider Chef::Provider::Service::Systemd
   supports status: true, restart: true, reload: true
   action [:enable, :start]
 end
@@ -65,9 +69,7 @@ html = node['fuelphp']['html']
 # deploy empty fuelphp v1.9
 deploy "#{html}" do
   repo 'github.com/fuel/fuel.git'
-  revision '1.9/develop'
-  user "#{user}"
-  group "#{www}"
+  revision 'refs/heads/1.9/develop'
 
   environment 'FUEL_ENV' => 'development'
   action :deploy
