@@ -39,7 +39,7 @@ www = "#{node['fuelphp']['group']['www']}"
 
 group "#{www}" do
   action :create
-  members "#{user}"
+  members ["#{user}", "apache"]
   append true
 end
 
