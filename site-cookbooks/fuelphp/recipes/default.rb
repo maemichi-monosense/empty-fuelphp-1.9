@@ -76,7 +76,7 @@ html = node['fuelphp']['html']
 
 # deploy empty fuelphp v1.9
 deploy "#{html}" do
-  repo 'github.com/fuel/fuel.git'
+  repo 'git://github.com/fuel/fuel.git'
   revision 'refs/heads/1.9/develop'
 
   environment 'FUEL_ENV' => 'development'
