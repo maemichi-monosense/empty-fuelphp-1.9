@@ -1,0 +1,11 @@
+<VirtualHost *:80>
+    ServerAdmin maemichi@monosense.co.jp
+    DocumentRoot <%= node['fuelphp']['doc_root'] %>
+    ServerName <%= node['fuelphp']['vhost_domain'] %>
+    ErrorLog logs/<%= node['fuelphp']['vhost_domain'] %>-error_log
+    CustomLog logs/<%= node['fuelphp']['vhost_domain'] %>-access_log common
+</VirtualHost>
+
+<Directory <%= node['fuelphp']['doc_root'] %>>
+    AllowOverride All
+</Directory>

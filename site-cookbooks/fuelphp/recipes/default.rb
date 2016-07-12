@@ -16,10 +16,10 @@
 end
 
 # setup doc root & set to be under www group
-user = 'ec2-user'
-name = "#{node['fuelphp']['group']['name']}"
+user = 'vagrant'
+www = "#{node['fuelphp']['group']['www']}"
 
-group "#{name}" do
+group "#{www}" do
   action :create
   members "#{user}"
   append true
@@ -31,7 +31,7 @@ directory "#{www}" do
   recursive true
   mode '2775'
   owner "#{user}"
-  group "#{name}"
+  group "#{www}"
   action :create
 end
 
@@ -40,16 +40,6 @@ doc_root = "#{node['fuelphp']['doc_root']}"
 directory "#{doc_root}" do
   recursive true
   action :create
-end
-
-index = "#{node['fuelphp']['doc_root']}#{node['fuelphp']['index']}"
-
-cookbook_file "#{index}" do
-  mode '0664'
-  source "#{node['fuelphp']['index']}"
-  owner "#{user}"
-  group "#{name}"
-  action :create_if_missing
 end
 
 # add virtual hosts
@@ -74,7 +64,7 @@ deploy "#{node['fuelphp']['docroot']}" do
   repo 'github.com/fuel/fuel.git'
   revision '1.9/develop'
   user "#{user}"
-  group "#{name}"
+  group "#{www}"
 
   environment 'FUEL_ENV' => 'development'
   action :deploy
