@@ -65,10 +65,8 @@ template "vhosts" do
   mode '0644'
 end
 
-html = node['fuelphp']['doc']
-
 # deploy empty fuelphp v1.9
-deploy "#{html}" do
+deploy "#{node['fuelphp']['deploy']}" do
   repo 'git://github.com/fuel/fuel.git'
   revision 'refs/heads/1.9/develop'
   scm_provider Chef::Provider::Git
