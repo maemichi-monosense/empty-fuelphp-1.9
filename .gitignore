@@ -38,3 +38,7 @@ bin/*
 
 ## vendor packages
 /vendor/
+
+# Knife Zero
+clients/
+nodes/
