@@ -71,6 +71,7 @@ html = node['fuelphp']['doc']
 deploy "#{html}" do
   repo 'git://github.com/fuel/fuel.git'
   revision 'refs/heads/1.9/develop'
+  scm_provider Chef::Provider::Git
 
   migrate false
   symlink_before_migrate Hash.new
@@ -78,5 +79,4 @@ deploy "#{html}" do
   environment 'FUEL_ENV' => 'development'
   action :deploy
   restart_command "cd #{node['fuelphp']['current']} && php composer.phar self-update && php composer.phar update"
-  scm_provider Chef::Provider::Git
 end
