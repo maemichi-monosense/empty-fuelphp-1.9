@@ -72,7 +72,7 @@ template "vhosts" do
   mode '0644'
 end
 
-html = node['fuelphp']['html']
+html = node['fuelphp']['www']
 
 # deploy empty fuelphp v1.9
 deploy "#{html}" do
@@ -84,7 +84,6 @@ deploy "#{html}" do
 
   environment 'FUEL_ENV' => 'development'
   action :deploy
-  restart_command "cd #{html} && php composer.phar update"
-
+  restart_command "cd #{html} && php composer.phar self-update && php composer.phar update"
   scm_provider Chef::Provider::Git
 end
