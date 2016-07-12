@@ -68,7 +68,7 @@ end
 # deploy empty fuelphp v1.9
 deploy "#{node['fuelphp']['deploy']}" do
   repo 'git://github.com/fuel/fuel.git'
-  revision 'refs/heads/1.9/develop'
+  branch '1.9/develop'
   scm_provider Chef::Provider::Git
 
   migrate false
