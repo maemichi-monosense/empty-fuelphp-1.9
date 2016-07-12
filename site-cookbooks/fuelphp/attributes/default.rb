@@ -1,4 +1,4 @@
-default['fuelphp']['httpd/conf.d']['path'] = '/etc/httpd/conf.d/' # with slash
+default['fuelphp']['httpd/conf.d']['path'] = '/etc/httpd/conf.d'
 default['fuelphp']['httpd/conf.d']['vhosts'] = 'vhosts.conf'
 default['fuelphp']['vhost_domain'] = 'fuelphp.monosense.com'
 default['fuelphp']['www'] = '/var/www'
