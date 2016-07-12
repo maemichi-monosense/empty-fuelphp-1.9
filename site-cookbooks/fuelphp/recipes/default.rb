@@ -8,11 +8,14 @@
 %w(php-mysql php-devel php-mbstring).each { |p| package p }
 
 # start services and set to start on boot
-%w(httpd mysqld).each do |srv|
-  service srv do
-    supports status: true, restart: true, reload: true
-    action [:enable, :start]
-  end
+service 'httpd' do
+  supports status: true, restart: true, reload: true
+  action [:enable, :start]
+end
+
+service 'mysqld' do
+  supports status: true, restart: true, reload: true
+  action [:enable, :start]
 end
 
 # setup doc root & set to be under www group
@@ -25,9 +28,7 @@ group "#{www}" do
   append true
 end
 
-www = "#{node['fuelphp']['www']}"
-
-directory "#{www}" do
+directory "#{node['fuelphp']['www']}" do
   recursive true
   mode '2775'
   owner "#{user}"

@@ -1,9 +1,9 @@
-default['fuelphp']['httpd/conf.d']['path'] = '/etc/httpd/conf.d/'
+default['fuelphp']['httpd/conf.d']['path'] = '/etc/httpd/conf.d/' # with slash
 default['fuelphp']['httpd/conf.d']['vhosts'] = 'vhosts.conf'
 default['fuelphp']['vhost_domain'] = 'fuelphp.monosense.com'
-default['fuelphp']['www'] = '/var/www/'
-default['fuelphp']['html'] = '/var/www/html/'
-default['fuelphp']['doc_root'] = '/var/www/html/public/'
+default['fuelphp']['www'] = '/var/www'
+default['fuelphp']['html'] = '/var/www/html'
+default['fuelphp']['doc_root'] = '/var/www/html/public'
 default['fuelphp']['index'] = 'index.php'
 default['fuelphp']['group']['www'] = 'www'
 default['fuelphp']['timezone'] = 'Asia/Tokyo'
