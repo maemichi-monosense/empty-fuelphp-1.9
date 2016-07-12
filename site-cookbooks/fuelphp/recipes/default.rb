@@ -59,8 +59,10 @@ template "php.ini" do
   notifies :reload, 'service[httpd]'
 end
 
+html = node['fuelphp']['html']
+
 # deploy empty fuelphp v1.9
-deploy "#{node['fuelphp']['docroot']}" do
+deploy "#{html}" do
   repo 'github.com/fuel/fuel.git'
   revision '1.9/develop'
   user "#{user}"
@@ -68,7 +70,7 @@ deploy "#{node['fuelphp']['docroot']}" do
 
   environment 'FUEL_ENV' => 'development'
   action :deploy
-  restart_command 'touch tmp/restart.txt'
+  restart_command "cd #{html} && php composer.phar update"
 
   scm_provider Chef::Provider::Git
 end
