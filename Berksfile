@@ -1,3 +1,3 @@
 source "https://supermarket.chef.io"
 
-cookbook "build-essential"
+cookbook "fuelphp", path: "site-cookbooks/fuelphp"
