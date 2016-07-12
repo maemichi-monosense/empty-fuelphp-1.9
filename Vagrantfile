@@ -1,4 +1,7 @@
 Vagrant.configure(2) do |config|
+  if Vagrant.has_plugin?("vagrant-cachier")
+    config.cache.scope = :box
+  end
 
   config.vm.box = "bento/centos-7.1"
 
