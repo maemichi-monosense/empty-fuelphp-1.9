@@ -79,6 +79,9 @@ deploy "#{html}" do
   repo 'git://github.com/fuel/fuel.git'
   revision 'refs/heads/1.9/develop'
 
+  migrate false
+  symlink_before_migrate Hash.new
+
   environment 'FUEL_ENV' => 'development'
   action :deploy
   restart_command "cd #{html} && php composer.phar update"
