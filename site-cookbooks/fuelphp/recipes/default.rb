@@ -23,7 +23,7 @@ service 'mariadb.service' do
 end
 
 # PHP
-%w(php-devel php-mbstring php-mysqlnd).each { |p| package p }
+%w(php-mysql php-devel php-mbstring).each { |p| package p }
 
 # set PHP.ini
 template "php.ini" do
