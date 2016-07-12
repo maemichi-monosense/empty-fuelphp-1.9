@@ -7,5 +7,8 @@
 </VirtualHost>
 
 <Directory <%= node['fuelphp']['doc_root'] %>>
-    AllowOverride All
+    Options Indexes FollowSymLinks
+    AllowOverride None
+    Order allow,deny
+    Allow from all
 </Directory>

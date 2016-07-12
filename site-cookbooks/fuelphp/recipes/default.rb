@@ -70,6 +70,8 @@ deploy "#{node['fuelphp']['deploy']}" do
   repo 'git://github.com/fuel/fuel.git'
   branch '1.9/develop'
   scm_provider Chef::Provider::Git
+  user "apache"
+  group "#{www}"
 
   migrate false
   symlink_before_migrate Hash.new
