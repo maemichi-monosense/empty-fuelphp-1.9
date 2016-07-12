@@ -68,3 +68,17 @@ template "php.ini" do
   mode '0644'
   notifies :reload, 'service[httpd]'
 end
+
+# deploy empty fuelphp v1.9
+deploy "#{node['fuelphp']['docroot']}" do
+  repo 'github.com/fuel/fuel.git'
+  revision '1.9/develop'
+  user "#{user}"
+  group "#{name}"
+
+  environment 'FUEL_ENV' => 'development'
+  action :deploy
+  restart_command 'touch tmp/restart.txt'
+
+  scm_provider Chef::Provider::Git
+end
