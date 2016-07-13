@@ -10,6 +10,9 @@ package 'git' do
 end
 
 # Apache
+include_recipe 'apache2'
+include_recipe 'apache2::mod_php5'
+
 web_app "fuelphp" do
   server_name node["network"]["interfaces"]["enp0s8"]["addresses"].keys[1]
   server_aliases [node['fuelphp']['FQDN'], "fuel.monosense.com", "fuel.example.com"]
