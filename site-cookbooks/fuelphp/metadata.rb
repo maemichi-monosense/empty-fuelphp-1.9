@@ -8,4 +8,4 @@ version          '0.1.0'
 
 depends 'apache2', '~> 3.2.2'
 depends 'mariadb', '~> 0.3.1'
-# depends 'yum-remi-chef', '~> 1.2.0'
+depends 'yum-remi-chef', '~> 1.2.0'

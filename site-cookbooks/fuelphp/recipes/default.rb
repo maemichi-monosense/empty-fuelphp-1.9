@@ -37,8 +37,9 @@ service 'mariadb.service' do
 end
 
 # PHP
-# include_recipe 'yum-remi-chef::remi-php70'
-%w(php php-mysql php-devel php-mbstring).each { |p| package p }
+include_recipe 'yum-remi-chef::remi-php56'
+
+%w(php-mysql php-devel php-mbstring).each { |p| package p }
 
 # set PHP.ini
 template "php.ini" do
