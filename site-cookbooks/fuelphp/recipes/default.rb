@@ -11,7 +11,7 @@ end
 
 # Apache
 web_app "fuelphp" do
-  server_name (node["ipaddress"] || node['hostname'])
+  server_name node["network"]["interfaces"]["enp0s8"]["addresses"].keys[1]
   server_aliases [node['fuelphp']['FQDN'], "fuel.monosense.com", "fuel.example.com"]
   docroot node['fuelphp']['doc_root']
   cookbook 'apache2'
