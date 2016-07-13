@@ -39,18 +39,15 @@ end
 # PHP
 include_recipe 'yum-remi-chef::remi-php56'
 
-%w(php-mysql php-devel php-mbstring).each { |p| package p }
+%w(php php-mysqlnd php-devel php-mbstring).each do |p|
+  package p do
+    action :upgrade
+    options '--skip-broken --enablerepo=remi-php56'
+  end
+end
 
 # set PHP.ini
-template "php.ini" do
-  path '/etc/php.ini'
-  source "php.ini.erb"
-  mode '0644'
-  notifies :reload, 'service[httpd]'
-end
-=begin
-file "php.ini" do
-  path '/etc/php.ini'
+file '/etc/php.ini' do
   _file = Chef::Util::FileEdit.new(path)
   _file.search_file_replace_line('^;?\s?date.timezone', %(date.timezone = "#{node['fuelphp']['timezone']}"\n))
   _file.search_file_replace_line('^;?\s?default_charset', %(default_charset = "UTF-8"\n))
@@ -58,7 +55,7 @@ file "php.ini" do
   mode '0644'
   notifies :reload, 'service[httpd]'
 end
-=end
+
 # setup doc root to be under www group
 user = 'vagrant'
 www = "#{node['fuelphp']['group']['www']}"
