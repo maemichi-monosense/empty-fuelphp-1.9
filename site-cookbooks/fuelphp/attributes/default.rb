@@ -1,6 +1,5 @@
-default['fuelphp']['httpd/conf.d']['path'] = '/etc/httpd/conf.d'
-default['fuelphp']['httpd/conf.d']['vhosts'] = 'vhosts.conf'
-default['fuelphp']['vhost_domain'] = 'fuelphp.monosense.com'
+default['fuelphp']['host_name'] = 'vhost'
+default['fuelphp']['FQDN'] = 'www.monosense.com'
 default['fuelphp']['www'] = '/var/www'
 default['fuelphp']['deploy'] = '/var/www/fuelphp'
 default['fuelphp']['current'] = '/var/www/fuelphp/current'

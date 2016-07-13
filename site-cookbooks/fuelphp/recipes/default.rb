@@ -10,22 +10,12 @@ package 'git' do
 end
 
 # Apache
-
-## add virtual hosts
-httpd_conf_d = node['fuelphp']['httpd/conf.d']
-
-directory "#{httpd_conf_d['path']}" do
-  recursive true
-  action :create
+web_app "fuelphp" do
+  server_name node['fuelphp']['host_name']
+  server_aliases [node['fuelphp']['FQDN'], "fuel.monosense.com", "fuel.example.com"]
+  docroot node['fuelphp']['doc_root']
+  cookbook 'apache2'
 end
-
-template "vhosts" do
-  path "#{httpd_conf_d['path']}/#{httpd_conf_d['vhosts']}"
-  source "vhosts.erb"
-  mode '0644'
-end
-
-include_recipe 'apache2'
 
 ## start services and set to start on boot
 service 'httpd' do
@@ -65,7 +55,7 @@ file "php.ini" do
   notifies :reload, 'service[httpd]'
 end
 =end
-# setup doc root & set to be under www group
+# setup doc root to be under www group
 user = 'vagrant'
 www = "#{node['fuelphp']['group']['www']}"
 
@@ -75,12 +65,12 @@ group "#{www}" do
   append true
 end
 
-directory "#{node['fuelphp']['www']}" do
+directory "#{node['fuelphp']['doc_root']}" do
   recursive true
   mode '2775'
   owner "#{user}"
   group "#{www}"
-  action :create
+  action :nothing
 end
 
 # deploy empty fuelphp v1.9
